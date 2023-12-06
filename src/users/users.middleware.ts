@@ -7,8 +7,8 @@ export class UsersMiddleware implements NestMiddleware {
     const password = '0000';
     req.body = {
       ...req.body,
-      active: false,
-      enabled: true,
+      isActive: false,
+      isEnabled: true,
       password: encodePassword(password),
     };
     next();

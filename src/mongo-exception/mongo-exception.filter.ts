@@ -1,4 +1,9 @@
-import { ArgumentsHost, Catch, ExceptionFilter } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpStatus,
+} from '@nestjs/common';
 import { MongoError } from 'mongodb';
 
 @Catch(MongoError)
@@ -16,9 +21,9 @@ export class MongoExceptionFilter implements ExceptionFilter {
       response = ctx.getResponse();
 
     return response.status(400).json({
-      statusCode: 400,
+      statusCode: HttpStatus.BAD_REQUEST,
       message: exception.message,
-      errors: exception,
+      //errors: exception,
     });
   }
 }

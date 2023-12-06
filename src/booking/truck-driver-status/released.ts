@@ -1,21 +1,14 @@
-import { Inject } from '@nestjs/common';
-import { ContractorService } from '../contractor/contractor.service';
-import { TruckDriver } from './entities/truck-driver.entity';
+import { TruckDriver } from '../entities/truck-driver.entity';
 import { TruckDriverStatusInterface } from './status.interface';
+import { ContractorService } from '../../contractor/contractor.service';
 
 export abstract class Released implements TruckDriverStatusInterface {
-  @Inject()
-  private readonly contractorService: ContractorService;
   truckDriver: TruckDriver;
+  contractorService: ContractorService;
 
   abstract changeTruckDriverStatus(): TruckDriver;
 
-  async changeDriverStatus(): Promise<void> {
-    await this.contractorService.setDriverAvailable(
-      this.truckDriver.contractor.code,
-      this.truckDriver.driver,
-    );
-  }
+  abstract changeDriverStatus(): Promise<void>;
 
-  abstract changeTruckStatus(): void;
+  abstract changeTruckStatus(): Promise<void>;
 }

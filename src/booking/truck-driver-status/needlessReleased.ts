@@ -1,22 +1,24 @@
-import { Inject } from '@nestjs/common';
-import { ContractorService } from '../contractor/contractor.service';
-import { TruckDriver } from './entities/truck-driver.entity';
-import { TruckDriverStatusEnum } from './entities/truck-driver-status.enum';
-import { ReleaseTypeEnum } from './entities/release-type.enum';
-import { Released } from './status.interface';
+import { TruckDriver } from '../entities/truck-driver.entity';
+import { TruckDriverStatusEnum } from '../entities/truck-driver-status.enum';
+import { ReleaseTypeEnum } from '../entities/release-type.enum';
+
+import { Released } from './released';
+import { ContractorService } from '../../contractor/contractor.service';
 
 export class NeedlessReleased extends Released {
-  @Inject()
-  private readonly contractorService: ContractorService;
-
-  constructor(truckDriver: TruckDriver, reason: string) {
+  constructor(
+    contactorService: ContractorService,
+    public truckDriver: TruckDriver,
+    public reason: string,
+  ) {
     super();
-    this.truckDriver = truckDriver;
-    this.reason = reason;
+    this.contractorService = contactorService;
+    /*this.truckDriver = truckDriver;
+    this.reason = reason;*/
   }
 
-  truckDriver: TruckDriver;
-  reason: string;
+  //truckDriver: TruckDriver;
+  //reason: string;
 
   changeTruckDriverStatus(): TruckDriver {
     this.truckDriver.truckDriverStatus = TruckDriverStatusEnum.RELEASED;
@@ -36,6 +38,13 @@ export class NeedlessReleased extends Released {
     await this.contractorService.setTruckAvailable(
       this.truckDriver.contractor.code,
       this.truckDriver.truck,
+    );
+  }
+
+  async changeDriverStatus(): Promise<void> {
+    await this.contractorService.setDriverAvailable(
+      this.truckDriver.contractor.code,
+      this.truckDriver.driver,
     );
   }
 }

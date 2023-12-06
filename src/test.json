@@ -1,0 +1,111 @@
+{
+  "bookingNumber": string,
+  "workOrderNumber": string,
+  "vessel": {
+    "id": string,
+    "name": string,
+    "imo": string,
+    "grossTonnage": number
+  },
+  "cargo": {
+    "id": string,
+    "name": string,
+    "code": string
+  },
+  "subCargo": {
+    "name": string,
+    "code": string
+  },
+  "imex": IMEXEnum,
+  "openedAt": string,
+  "truckDriverList": [
+    {
+      "truck": {
+        "number": string,
+        "truckLicense": string,
+        "truckType": TruckTypeEnum
+      },
+      "driver": {
+        "drivingLicense": string,
+        "name": string,
+        "nationalID": string
+      },
+      "contractor": {
+        "id": string,
+        "name": string,
+        "code": string
+      },
+      "id": number,
+      "tripList": [
+        {
+          "isOpened": boolean,
+          "openedAt": string,
+          "tripCheckPointList": [
+            {
+              "checkPoint": {
+                "order": number,
+                "label": string,
+                "description": string,
+                "role": RoleEnum,
+                "locationType": LocationTypeEnum,
+                "repeat": RepeateEnum,
+                "id": string
+              },
+              "time": string,
+              "createdBy": string,
+              "duration": number
+            }
+          ],
+          "closedAt": string
+        }
+      ],
+      "truckDriverStatusDetails": [
+        {
+          "truckDriverStatus": TruckDriverStatusEnum
+          ",
+          "time": string,
+          "releaseType": ReleaseTypeEnum,
+          "releaseReason": string
+        }
+      ],
+      "truckDriverStatus": TruckDriverStatusEnum
+    }
+  ],
+  "bookingStatus": BookingStatusEnum,
+  "voyage": {
+    "arrivalTime": string,
+    "id": number,
+    "departureTime": string
+  },
+  "pattern": {
+    "_id": string,
+    "code": string,
+    "imex": IMEXEnum,
+    "name": string
+  },
+  "accessRightList": [
+    {
+      "checkPoint": {
+        "order": number,
+        "label": string,
+        "description": string,
+        "role": RoleEnum,
+        "locationType": LocationTypeEnum,
+        "repeat": RepeatEnum,
+        "id": string
+      },
+      "location": {
+        "_id": string,
+        "lat": number,
+        "long": number,
+        "number": string,
+        "code": string,
+        "branch": string
+      },
+      "user": string
+    }
+  ],
+  "createdAt": string,
+  "editedAt": string,
+  "_id": string
+}

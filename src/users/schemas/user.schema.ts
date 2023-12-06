@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { Role } from './role.enum';
+import { Role } from '../entities/role.enum';
 import { EntityAudit } from '../../entity-audit/entities/entity-audit.entity';
 
 export type UserDocument = HydratedDocument<User>;
@@ -26,10 +26,10 @@ export class User extends EntityAudit {
   password: string;
 
   @Prop()
-  active: boolean;
+  isActive: boolean;
 
   @Prop()
-  enabled: boolean;
+  isEnabled: boolean;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

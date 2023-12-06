@@ -5,13 +5,7 @@
  * @Date : 10/17/2023
  * @Time : 4:07 PM
  */
-import { IsDefined, IsNotEmpty } from 'class-validator';
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateSubCargoDto } from './create-sub-cargo.dto';
 
-export class CreateSubCargoDto {
-  @IsDefined()
-  @IsNotEmpty()
-  name: string;
-  @IsDefined()
-  @IsNotEmpty()
-  code: string;
-}
+export class UpdateSubCargoDto extends PartialType(CreateSubCargoDto) {}

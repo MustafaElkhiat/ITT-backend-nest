@@ -1,17 +1,19 @@
 import { Role } from '../entities/role.enum';
-import { IsDefined, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsDefined, IsEmail, IsEnum, IsNotEmpty } from 'class-validator';
 
 export class CreateUserDto {
   @IsDefined()
   @IsNotEmpty()
-  name: string;
+  readonly name: string;
   @IsDefined()
   @IsNotEmpty()
-  role: Role;
+  @IsEnum(Role)
+  readonly role: Role;
   @IsDefined()
   @IsNotEmpty()
-  branch?: string;
+  readonly branch?: string;
   @IsDefined()
+  @IsNotEmpty()
   @IsEmail()
-  email: string;
+  readonly email: string;
 }

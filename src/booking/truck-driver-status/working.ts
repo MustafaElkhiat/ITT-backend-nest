@@ -1,18 +1,13 @@
-import { Inject } from '@nestjs/common';
-import { ContractorService } from '../contractor/contractor.service';
-import { TruckDriver } from './entities/truck-driver.entity';
-import { TruckDriverStatusEnum } from './entities/truck-driver-status.enum';
+import { TruckDriver } from '../entities/truck-driver.entity';
+import { TruckDriverStatusEnum } from '../entities/truck-driver-status.enum';
 import { TruckDriverStatusInterface } from './status.interface';
+import { ContractorService } from '../../contractor/contractor.service';
 
 export class Working implements TruckDriverStatusInterface {
-  @Inject()
-  private readonly contractorService: ContractorService;
-
-  constructor(truckDriver: TruckDriver) {
-    this.truckDriver = truckDriver;
-  }
-
-  truckDriver: TruckDriver;
+  constructor(
+    public contractorService: ContractorService,
+    public truckDriver: TruckDriver,
+  ) {}
 
   changeTruckDriverStatus(): TruckDriver {
     this.truckDriver.truckDriverStatus = TruckDriverStatusEnum.WORKING;
